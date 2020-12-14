@@ -22,7 +22,7 @@ set BUILDDIR=build
 set SRCDIR=src
 set MAIN=main
 set SRCFILESEXT=*.cpp *.c
-set PROGRAMNAME=program
+set EXEC=program
 
 set option=%1
 echo    make %option%
@@ -64,13 +64,13 @@ for %%f in (%SRCFILESEXT%) do (
 )
 echo.
 cd ..
-echo    LINKING %BUILDDIR%/%PROGRAMNAME%.exe FROM %WINDIR%/%MAIN%.o AND %DEPENDANCIES%
-g++ -o %BUILDDIR%/%PROGRAMNAME%.exe %WINDIR%/%MAIN%.o %DEPENDANCIES%
+echo    LINKING %BUILDDIR%/%EXEC%.exe FROM %WINDIR%/%MAIN%.o AND %DEPENDANCIES%
+g++ -o %BUILDDIR%/%EXEC%.exe %WINDIR%/%MAIN%.o %DEPENDANCIES%
 echo.
 goto :EOF
 
 :RUN
-start %BUILDDIR%/%PROGRAMNAME%.exe
+start %BUILDDIR%/%EXEC%.exe
 goto :EOF
 
 :CLEAN
