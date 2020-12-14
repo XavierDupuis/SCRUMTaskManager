@@ -71,8 +71,6 @@ goto :EOF
 
 :RUN
 start %BUILDDIR%/%PROGRAMNAME%.exe
-echo %errorlevel%
-REM IF %ERRORLEVEL% NEQ 0 echo ERROR WHILE STARTING %PROGRAMNAME%.exe
 goto :EOF
 
 :CLEAN
@@ -81,5 +79,4 @@ IF exist %BUILDDIR% (rmdir %BUILDDIR% /q /s)
 goto :EOF
 
 :END
-pause
 echo ===  MAKEFILE END  === 
