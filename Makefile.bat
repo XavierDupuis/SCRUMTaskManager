@@ -8,6 +8,8 @@ REM
 REM @copyright Copyright (c) 2020
 REM ***********************************************
 
+setLocal EnableDelayedExpansion 
+REM COMMENT NEXT LINE FOR DEBUGGING PERSPECTIVE
 @echo off
 cls
 title Makefile
@@ -36,19 +38,25 @@ IF NOT exist %WINDIR%   (md %WINDIR%)
 IF NOT exist %BUILDDIR% (md %BUILDDIR%)
 IF NOT exist %SRCDIR%   (md %SRCDIR%)
 cd %SRCDIR%
+set DEPENDANCIES=
 for %%f in (%SRCFILESEXT%) do (
-    echo    Compiled %%f into %%~nf.o
+    echo    COMPILING %%f INTO %%~nf.o
     g++ -c %%f -o ../%WINDIR%/%%~nf.o
+    if NOT [%%~nf]==[%MAIN%] (
+        set DEPENDANCIES=!DEPENDANCIES!win/%%~nf.o 
     )
+)
 echo.
 cd ..
-g++ -o %BUILDDIR%/%PROGRAMNAME%.exe %WINDIR%/%MAIN%.o
-echo    Linked %PROGRAMNAME%.exe from %MAIN%.o
+echo    LINKING %BUILDDIR%/%PROGRAMNAME%.exe FROM %WINDIR%/%MAIN%.o AND %DEPENDANCIES%
+g++ -o %BUILDDIR%/%PROGRAMNAME%.exe %WINDIR%/%MAIN%.o %DEPENDANCIES%
 echo.
 goto :EOF
 
 :RUN
 start %BUILDDIR%/%PROGRAMNAME%.exe
+echo %errorlevel%
+REM IF %ERRORLEVEL% NEQ 0 echo ERROR WHILE STARTING %PROGRAMNAME%.exe
 goto :EOF
 
 :CLEAN

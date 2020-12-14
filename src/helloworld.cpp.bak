@@ -19,8 +19,6 @@ using namespace std;
 
 int main() {
     cout << "TEST PROGRAM MAIN" << endl;
-    cout << T1().t1content << endl;
-    cout << T2().t2content << endl;
     string name;
     while (true)
     {
