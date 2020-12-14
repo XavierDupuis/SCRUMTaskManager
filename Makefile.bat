@@ -1,3 +1,6 @@
+@echo off
+REM COMMENT PREVIOUS LINE FOR DEBUGGING PERSPECTIVE
+
 REM ***********************************************
 REM @file Makefile.bat
 REM @author XAVIER DUPUIS (xavier0978@hotmail.fr)
@@ -9,8 +12,6 @@ REM @copyright Copyright (c) 2020
 REM ***********************************************
 
 setLocal EnableDelayedExpansion 
-REM COMMENT NEXT LINE FOR DEBUGGING PERSPECTIVE
-@echo off
 cls
 title Makefile
 echo === MAKEFILE BEGIN ===
@@ -23,15 +24,30 @@ set MAIN=main
 set SRCFILESEXT=*.cpp *.c
 set PROGRAMNAME=program
 
-
 set option=%1
 echo    make %option%
 echo.
 
 IF [%option%]==[]       (call :MAKE)
+IF [%option%]==[help]   (call :HELP)
 IF [%option%]==[run]    (call :MAKE && call :RUN)
 IF [%option%]==[clean]  (call :CLEAN)
 goto END
+
+REM **** RULES ****
+
+:HELP
+echo *****************************************************
+echo ** ./Makefile.bat                                  **
+echo **     Executes MAKE rule (compile and link)       **
+echo ** ./Makefile.bat help                             **
+echo **     Displays help informations                  **
+echo ** ./Makefile.bat run                              **
+echo **     Executes MAKE rule and run executable       **
+echo ** ./Makefile.bat clean                            **
+echo **     Delete /win and /build directories          **
+echo *****************************************************
+goto :EOF
 
 :MAKE
 IF NOT exist %WINDIR%   (md %WINDIR%)
@@ -65,4 +81,5 @@ IF exist %BUILDDIR% (rmdir %BUILDDIR% /q /s)
 goto :EOF
 
 :END
+pause
 echo ===  MAKEFILE END  === 
