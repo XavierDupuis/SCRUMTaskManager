@@ -22,7 +22,7 @@ int main() {
     cout << "TEST PROGRAM MAIN" << endl;
     TaskManager taskManager = TaskManager();
 
-    unique_ptr<Task> task1 = std::make_unique<Task>("Do dishes", 987, 654);
+    auto task1 = make_unique<Task>("Do dishes", 987, 654);
     taskManager.tasks_.push_back(move(task1));
 
     cout << "Task 0 : weight = " << taskManager.tasks_[0]->weight 

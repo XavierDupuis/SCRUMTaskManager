@@ -1,6 +1,7 @@
-CC=g++
+CC=g++ -std=c++20
 CFLAGS=-W -Wall -ansi -pedantic
 LDFLAGS=-lm
+
 
 SRCDIR=src
 LINUXDIR=linux
