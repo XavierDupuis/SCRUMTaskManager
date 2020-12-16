@@ -12,14 +12,20 @@
 #include <cstdio>
 #include <algorithm>
 
-#include "t1.h"
+#include "TaskManager.h"
 #include "t2.h"
 
 using namespace std;
 
 int main() {
     cout << "TEST PROGRAM MAIN" << endl;
-    cout << T1().t1content << endl;
+    TaskManager taskManager = TaskManager();
+    Task task1 = {987,654};
+    taskManager.tasks_.push_back(task1);
+
+    cout << "Task 0 : weight = " << taskManager.tasks_[0].weight 
+       << "  |  value =  " << taskManager.tasks_[0].value << endl;
+
     cout << T2().t2content << endl;
     string name;
     while (true)
