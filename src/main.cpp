@@ -1,6 +1,6 @@
 /**
- * @file helloworld.cpp
- * @author XAVIER DUPUIS (xavier0978@hotmail.fr)
+ * @file main.cpp
+ * @author XAVIER DUPUIS, OLIVIER SAINT-CYR (xavier0978@hotmail.fr)
  * @brief 
  * @version 0.1
  * @date 2020-12-12
@@ -20,11 +20,12 @@ using namespace std;
 int main() {
     cout << "TEST PROGRAM MAIN" << endl;
     TaskManager taskManager = TaskManager();
-    Task task1 = {987,654};
+
+    unique_ptr<Task> task1 = make_unique<Task>("Do dishes", 987, 654);
     taskManager.tasks_.push_back(task1);
 
-    cout << "Task 0 : weight = " << taskManager.tasks_[0].weight 
-       << "  |  value =  " << taskManager.tasks_[0].value << endl;
+    cout << "Task 0 : weight = " << taskManager.tasks_[0]->weight 
+       << "  |  value =  " << taskManager.tasks_[0]->value << endl;
 
     cout << T2().t2content << endl;
     string name;

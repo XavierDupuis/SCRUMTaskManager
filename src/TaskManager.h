@@ -3,7 +3,8 @@
 
 #include <algorithm>
 #include <vector>
-#include "task.h"
+#include <memory>
+#include "Task.h"
 
 class TaskManager
 {
@@ -16,7 +17,7 @@ public:
 
 // remove next commented line
 //private:
-    std::vector<Task> tasks_;
+    std::vector<std::unique_ptr<Task>> tasks_;
 };
 
 #endif
