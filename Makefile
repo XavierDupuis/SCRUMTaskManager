@@ -16,8 +16,9 @@ $(EXEC): $(OBJECTS)
 	$(CC) -o $(BUILDDIR)/$@ $(LINUXDIR)/$^ $(LDFLAGS)
 
 %.o: %.cpp %.h
-	$(CC) -o $(LINUXDIR)/$@ -c $(SRCDIR)/$< $(CFLAGS)
-
+	$(CC) -o $@ -c $ $< $(CFLAGS)
+# %.o: %.cpp %.h
+# 	$(CC) -o $(LINUXDIR)/$@ -c $(SRCDIR)/$< $(CFLAGS)
 run:
 	./$(BUILDDIR)/$(EXEC)
 

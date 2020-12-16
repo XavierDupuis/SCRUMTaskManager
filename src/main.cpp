@@ -11,6 +11,7 @@
 #include <iostream>
 #include <cstdio>
 #include <algorithm>
+#include <memory>
 
 #include "TaskManager.h"
 #include "t2.h"
@@ -21,8 +22,8 @@ int main() {
     cout << "TEST PROGRAM MAIN" << endl;
     TaskManager taskManager = TaskManager();
 
-    unique_ptr<Task> task1 = make_unique<Task>("Do dishes", 987, 654);
-    taskManager.tasks_.push_back(task1);
+    unique_ptr<Task> task1 = std::make_unique<Task>("Do dishes", 987, 654);
+    taskManager.tasks_.push_back(move(task1));
 
     cout << "Task 0 : weight = " << taskManager.tasks_[0]->weight 
        << "  |  value =  " << taskManager.tasks_[0]->value << endl;
