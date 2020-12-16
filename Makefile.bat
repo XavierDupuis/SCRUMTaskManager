@@ -30,6 +30,7 @@ echo.
 
 IF [%option%]==[]       (call :MAKE)
 IF [%option%]==[help]   (call :HELP)
+IF [%option%]==[start]  (call :MAKE && call :START)
 IF [%option%]==[run]    (call :MAKE && call :RUN)
 IF [%option%]==[clean]  (call :CLEAN)
 goto END
@@ -37,16 +38,22 @@ goto END
 REM **** RULES ****
 
 :HELP
-echo *****************************************************
-echo ** ./Makefile.bat                                  **
-echo **     Executes MAKE rule (compile and link)       **
-echo ** ./Makefile.bat help                             **
-echo **     Displays help informations                  **
-echo ** ./Makefile.bat run                              **
-echo **     Executes MAKE rule and run executable       **
-echo ** ./Makefile.bat clean                            **
-echo **     Delete /win and /build directories          **
-echo *****************************************************
+echo ***********************************************************
+echo ** ./Makefile.bat                                        **
+echo **     Executes MAKE rule (compile and link)             **
+echo **                                                       **
+echo ** ./Makefile.bat help                                   **
+echo **     Displays help informations                        **
+echo **                                                       **
+echo ** ./Makefile.bat start                                  **
+echo **     Executes MAKE rule and start in single window     **
+echo **                                                       **
+echo ** ./Makefile.bat run                                    **
+echo **     Executes MAKE rule and run executable in console  **
+echo **                                                       **
+echo ** ./Makefile.bat clean                                  **
+echo **     Delete /win and /build directories                **
+echo ***********************************************************
 goto :EOF
 
 :MAKE
@@ -69,8 +76,12 @@ g++ -o %BUILDDIR%/%EXEC%.exe %WINDIR%/%MAIN%.o %DEPENDANCIES%
 echo.
 goto :EOF
 
-:RUN
+:START
 start %BUILDDIR%/%EXEC%.exe
+goto :EOF
+
+:RUN
+.\%BUILDDIR%\%EXEC%.exe
 goto :EOF
 
 :CLEAN

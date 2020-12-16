@@ -19,7 +19,7 @@
 using namespace std;
 
 int main() {
-    cout << "TEST PROGRAM MAIN" << endl;
+    cout << " - - - BEGIN PROGRAM MAIN - - - " << endl;
     TaskManager taskManager = TaskManager();
 
     unique_ptr<Task> task1 = make_unique<Task>("Do dishes", 987, 654);
@@ -32,12 +32,12 @@ int main() {
 
     cout << T2().t2content << endl;
     string name;
-    while (true)
-    {
-        cout << " ENTER YOUR NAME : ";
-        cin >> name;
-        cout << endl;
-        cout << " HELLO " << name;
-        cout << endl << endl;
-    }
+
+    
+    cout << " - - - END PROGRAM MAIN - - - " << endl;
+    // Next 2 lines are for single window behavior
+    cout << " - - - CTRL+C TO ABORT - - - " << endl;
+    while (true) {}
+
+    return 0;
 }
