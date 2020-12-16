@@ -1,8 +1,7 @@
 CC=g++
-CXXFLAGS = -std=c++17
+CCFLAGS = -std=c++17
 CFLAGS=-W -Wall -ansi -pedantic
 LDFLAGS=-lm
-
 
 SRCDIR=src
 LINUXDIR=linux
@@ -13,14 +12,20 @@ SOURCES=$(wildcard $(SRCDIR)/*.cpp)
 OBJECTS=$(SOURCES:.cpp=.o)
 
 all: $(EXEC) $(SOURCES)
-	
+
+
 $(EXEC): $(OBJECTS)
-	$(CC) -o $(BUILDDIR)/$@ $(LINUXDIR)/$^ $(LDFLAGS)
+	$(CC) -o $@ $^ $(LDFLAGS) $(CCFLAGS)
 
 %.o: %.cpp %.h
-	$(CC) -o $@ -c $ $< $(CFLAGS)
+	$(CC) -o $@ -c $< $(CFLAGS) $(CCFLAGS)
+
+# $(EXEC): $(OBJECTS)
+# 	$(CC) -o $(BUILDDIR)/$@ $(LINUXDIR)/$^ $(LDFLAGS) $(CCFLAGS)
+
 # %.o: %.cpp %.h
 # 	$(CC) -o $(LINUXDIR)/$@ -c $(SRCDIR)/$< $(CFLAGS)
+
 run:
 	./$(BUILDDIR)/$(EXEC)
 
