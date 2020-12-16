@@ -17,7 +17,7 @@ public:
 
 // remove next commented line
 //private:
-    std::vector<std::unique_ptr<Task> > tasks_;
+    std::vector<unique_ptr<Task>> tasks_;
 };
 
 #endif

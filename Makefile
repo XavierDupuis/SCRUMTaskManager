@@ -1,4 +1,5 @@
-CC=g++ -std=c++20
+CC=g++
+CXXFLAGS = -std=c++17
 CFLAGS=-W -Wall -ansi -pedantic
 LDFLAGS=-lm
 
