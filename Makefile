@@ -22,7 +22,7 @@ $(BIN_DIR)/%.o: $(SRC_DIR)/%.cpp # $(SRC_DIR)/%.h
 	mkdir -p $(BIN_DIR)
 	$(CC) -o $@ -c $< $(CFLAGS) $(CCFLAGS)
 
-run:
+run: all
 	./$(BUILD_DIR)/$(EXEC)
 
 clean:
