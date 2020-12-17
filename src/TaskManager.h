@@ -12,8 +12,8 @@ public:
     TaskManager(unsigned iterPeriod, unsigned maxEffortByPeriod);
     
     bool AddTask(std::unique_ptr<Task> task);
-    bool UpdateTask(unsigned long id, unsigned weight, unsigned value);
-    bool RemoveTask(unsigned long id);
+    bool UpdateTask(unsigned long& id, unsigned weight, unsigned value);
+    bool RemoveTask(const unsigned long& id);
     friend std::ostream& operator<<(std::ostream& out, const TaskManager& taskManager);
 
 private:

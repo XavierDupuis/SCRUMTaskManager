@@ -23,14 +23,16 @@ using namespace std;
 int main() {
     cout << " - - - BEGIN PROGRAM MAIN - - - " << endl;
     TaskManager taskManager = TaskManager(3, 60);
-    Controller controller;
+    Controller controller(taskManager);
 
     taskManager.AddTask(make_unique<Task>("taskUsefull", 12, 123));
     taskManager.AddTask(make_unique<Task>("taskUseless", 99, 666));
     taskManager.AddTask(make_unique<Task>("taskTrash", 35, 999));
 
-    controller.inputTask(taskManager);
-    
+    controller.inputAndAddTask();
+
+    cout << taskManager << endl;
+    controller.removeTask();
     cout << taskManager << endl;
 
     cout << " - - - END PROGRAM MAIN - - - " << endl;

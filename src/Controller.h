@@ -8,12 +8,16 @@
 class Controller 
 {
 public:
-    bool inputTask(TaskManager& taskManager);
+    Controller(TaskManager& taskManager);
+
+    bool inputAndAddTask();
+    bool removeTask();
 
 private:
     template<typename T>
-    T inputValue(std::string query);
+    T input(std::string query);
 
+    TaskManager& taskManager_;
 };
 
 #endif // CONTROLLER_H

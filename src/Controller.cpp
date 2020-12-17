@@ -1,19 +1,27 @@
 #include "Controller.h"
 
-// Controller::Controller(){}
-
-bool Controller::inputTask(TaskManager& taskManager)
+Controller::Controller(TaskManager& taskManager) 
+    : taskManager_(taskManager)
 {
-    std::string name = inputValue<std::string>(" Task Name : ");
-    unsigned value = inputValue<unsigned>(" Task Value : ");
-    unsigned weight = inputValue<unsigned>(" Task weight : ");
+}
+
+bool Controller::inputAndAddTask()
+{
+    std::string name = input<std::string>(" Task Name : ");
+    unsigned value = input<unsigned>(" Task Value : ");
+    unsigned weight = input<unsigned>(" Task weight : ");
 
     std::cout << std::endl;
-    return taskManager.AddTask(std::make_unique<Task>(name,weight,value));
+    return taskManager_.AddTask(std::make_unique<Task>(name,weight,value));
 } 
 
+bool Controller::removeTask()
+{
+    return taskManager_.RemoveTask(input<unsigned long>(" Task ID : "));
+}
+
 template<typename T>
-T Controller::inputValue(std::string query)
+T Controller::input(std::string query)
 {
     bool validInput = true;
     T input;

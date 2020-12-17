@@ -15,7 +15,7 @@ bool TaskManager::AddTask(std::unique_ptr<Task> task)
     return false;
 }
 
-bool TaskManager::UpdateTask(unsigned long id, unsigned weight, unsigned value)
+bool TaskManager::UpdateTask(unsigned long& id, unsigned weight, unsigned value)
 {
     auto pos = std::find_if(tasks_.begin(), tasks_.end(), [&id](std::unique_ptr<Task>& task)
     {
@@ -31,7 +31,7 @@ bool TaskManager::UpdateTask(unsigned long id, unsigned weight, unsigned value)
     return false;
 }
 
-bool TaskManager::RemoveTask(unsigned long id)
+bool TaskManager::RemoveTask(const unsigned long& id)
 {
     auto pos = std::find_if(tasks_.begin(), tasks_.end(), [&id](std::unique_ptr<Task>& task)
     {
