@@ -1,6 +1,7 @@
 /**
  * @file main.cpp
- * @author XAVIER DUPUIS, OLIVIER SAINT-CYR (xavier0978@hotmail.fr)
+ * @author XAVIER DUPUIS / OLIVIER SAINT-CYR
+ * @e      xavier0978@hotmail.fr /  saintcyr.olivier1@gmail.com
  * @brief 
  * @version 0.1
  * @date 2020-12-12
