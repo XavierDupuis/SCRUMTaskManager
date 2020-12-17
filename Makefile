@@ -8,16 +8,17 @@ LINUXDIR=linux
 BUILDDIR=build
 EXEC=program.out
 
-SOURCES=$(wildcard $(SRCDIR)/*.cpp)
+SOURCES=$(wildcard */*.cpp)
 OBJECTS=$(SOURCES:.cpp=.o)
 
 all: $(EXEC) $(SOURCES)
 
-
 $(EXEC): $(OBJECTS)
+	mkdir -p $(BUILDDIR)
 	$(CC) -o $@ $^ $(LDFLAGS) $(CCFLAGS)
 
 %.o: %.cpp %.h
+	mkdir -p $(LINUXDIR)
 	$(CC) -o $@ -c $< $(CFLAGS) $(CCFLAGS)
 
 # $(EXEC): $(OBJECTS)
@@ -31,3 +32,6 @@ run:
 
 clean:
 	rm -rf $(OBJECTS)
+	rm -rf $(EXEC)
+	rmdir $(BUILDDIR)
+	rmdir $(LINUXDIR)
