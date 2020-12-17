@@ -2,21 +2,25 @@
 #include <limits>
 #include <ostream>
 
+unsigned Task::idCounter = 0;
+
 Task::Task(std::string name, unsigned weight, unsigned value)
 {
     this->name = name;
     this->weight = weight;
     this->value = value;
+    this->id = idCounter++;
     actualiseNetValue();
 }
 
 std::ostream& operator<<(std::ostream& out, const Task& task)
 {
-    out << "Task " << task.name << " : weight = " << task.weight 
-        << "  |  value =  " << task.value << std::endl;
+    //sprintf();
+    
+    out << "id : " << task.id << std::setw(15) << task.name << " : weight = " << task.weight 
+        << "  |  value =  " << task.value;
     return out;
 }
-
 
 void Task::actualiseNetValue()
 {

@@ -9,15 +9,17 @@
 class TaskManager
 {
 public:
-    TaskManager();
+    TaskManager(unsigned iterPeriod, unsigned maxEffortByPeriod);
     
-    bool AddTask(Task& task);
-    bool UpdateTask(Task& task);
-    bool RemoveTask(Task& task);
+    bool AddTask(std::unique_ptr<Task> task);
+    bool UpdateTask(unsigned long id, unsigned weight, unsigned value);
+    bool RemoveTask(unsigned long id);
+    friend std::ostream& operator<<(std::ostream& out, const TaskManager& taskManager);
 
-// remove next commented line
-//private:
+private:
+    unsigned iterPeriod_;
+    unsigned maxEffortByPeriod_;
     std::vector<std::unique_ptr<Task>> tasks_;
 };
 
-#endif
+#endif // TASKMANAGER_H

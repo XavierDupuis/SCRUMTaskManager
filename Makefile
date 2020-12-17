@@ -1,3 +1,14 @@
+#
+# @file Makefile
+# @author XAVIER DUPUIS / OLIVIER SAINT-CYR
+# @e      xavier0978@hotmail.fr /  saintcyr.olivier1@gmail.com
+# @brief 
+# @version 0.1
+# @date 2020-12-16
+# 
+# @copyright Copyright (c) 2020
+#
+
 CC=g++
 CCFLAGS = -std=c++17
 CFLAGS=-W -Wall -ansi -pedantic

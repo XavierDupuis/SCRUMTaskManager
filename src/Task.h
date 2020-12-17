@@ -3,6 +3,7 @@
 
 #include <string>
 #include <ostream>
+#include <iomanip>
 
 struct Task
 {
@@ -14,9 +15,12 @@ struct Task
     double netValue;
     unsigned weight;
     unsigned value;
+    unsigned id;
+
+    static unsigned idCounter;
 
 private:
     void actualiseNetValue();
 };
 
-#endif
+#endif //TASK_H
