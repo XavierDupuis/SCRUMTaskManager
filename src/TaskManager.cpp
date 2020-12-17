@@ -40,8 +40,9 @@ bool TaskManager::RemoveTask(const unsigned long& id)
     
     if (pos != tasks_.end())
     {
-        std::iter_swap(pos, tasks_.end()-1);
-        tasks_.pop_back();
+        /*std::iter_swap(pos, tasks_.end()-1);
+        tasks_.pop_back();*/
+        tasks_.erase(remove(tasks_.begin(), tasks_.end(), *pos));
         return true;
     }
     return false;
@@ -55,4 +56,13 @@ std::ostream& operator<<(std::ostream& out, const TaskManager& taskManager)
         out << *it << std::endl;
     }
     return out;
+}
+
+void TaskManager::displayTasks()
+{
+    std::cout << " TaskManager Tasks : " << std::endl;
+    for (auto& it : tasks_)
+    {
+        std::cout << *it << std::endl;
+    }
 }

@@ -52,7 +52,7 @@ echo ** ./Makefile.bat run                                    **
 echo **     Executes MAKE rule and run executable in console  **
 echo **                                                       **
 echo ** ./Makefile.bat clean                                  **
-echo **     Delete /win and /build directories                **
+echo **     Delete /bin and /build directories                **
 echo ***********************************************************
 goto :EOF
 
@@ -66,7 +66,7 @@ for %%f in (%SRCFILESEXT%) do (
     echo    COMPILING %%f INTO %%~nf.o
     g++ -c %%f -o ../%BIN_DIR%/%%~nf.o
     if NOT [%%~nf]==[%MAIN%] (
-        set DEPENDANCIES=!DEPENDANCIES!win/%%~nf.o 
+        set DEPENDANCIES=!DEPENDANCIES!%BIN_DIR%/%%~nf.o 
     )
 )
 echo.
