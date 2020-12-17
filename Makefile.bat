@@ -17,12 +17,12 @@ title Makefile
 echo === MAKEFILE BEGIN ===
 echo.
 
-set WINDIR=win
-set BUILDDIR=build
-set SRCDIR=src
+set SRC_DIR=src
+set BIN_DIR=bin
+set BUILD_DIR=build
 set MAIN=main
 set SRCFILESEXT=*.cpp *.c
-set EXEC=program
+set EXEC=program.exe
 
 set option=%1
 echo    make %option%
@@ -57,36 +57,36 @@ echo ***********************************************************
 goto :EOF
 
 :MAKE
-IF NOT exist %WINDIR%   (md %WINDIR%)
-IF NOT exist %BUILDDIR% (md %BUILDDIR%)
-IF NOT exist %SRCDIR%   (md %SRCDIR%)
-cd %SRCDIR%
+IF NOT exist %BIN_DIR%   (md %BIN_DIR%)
+IF NOT exist %BUILD_DIR% (md %BUILD_DIR%)
+IF NOT exist %SRC_DIR%   (md %SRC_DIR%)
+cd %SRC_DIR%
 set DEPENDANCIES=
 for %%f in (%SRCFILESEXT%) do (
     echo    COMPILING %%f INTO %%~nf.o
-    g++ -c %%f -o ../%WINDIR%/%%~nf.o
+    g++ -c %%f -o ../%BIN_DIR%/%%~nf.o
     if NOT [%%~nf]==[%MAIN%] (
         set DEPENDANCIES=!DEPENDANCIES!win/%%~nf.o 
     )
 )
 echo.
 cd ..
-echo    LINKING %BUILDDIR%/%EXEC%.exe FROM %WINDIR%/%MAIN%.o AND %DEPENDANCIES%
-g++ -o %BUILDDIR%/%EXEC%.exe %WINDIR%/%MAIN%.o %DEPENDANCIES%
+echo    LINKING %BUILD_DIR%/%EXEC% FROM %BIN_DIR%/%MAIN%.o AND %DEPENDANCIES%
+g++ -o %BUILD_DIR%/%EXEC% %BIN_DIR%/%MAIN%.o %DEPENDANCIES%
 echo.
 goto :EOF
 
 :START
-start %BUILDDIR%/%EXEC%.exe
+start %BUILD_DIR%/%EXEC%
 goto :EOF
 
 :RUN
-.\%BUILDDIR%\%EXEC%.exe
+.\%BUILD_DIR%\%EXEC%
 goto :EOF
 
 :CLEAN
-IF exist %WINDIR%   (rmdir %WINDIR% /q /s)
-IF exist %BUILDDIR% (rmdir %BUILDDIR% /q /s)
+IF exist %BIN_DIR%   (rmdir %BIN_DIR% /q /s)
+IF exist %BUILD_DIR% (rmdir %BUILD_DIR% /q /s)
 goto :EOF
 
 :END
