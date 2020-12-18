@@ -20,6 +20,7 @@ echo.
 set SRC_DIR=src
 set BIN_DIR=bin
 set BUILD_DIR=build
+set TEST_DIR=test
 set MAIN=main
 set SRCFILESEXT=*.cpp *.c
 set EXEC=program.exe
@@ -29,31 +30,27 @@ echo    make %option%
 echo.
 
 IF [%option%]==[]       (call :MAKE)
+IF [%option%]==[make]       (call :MAKE)
 IF [%option%]==[help]   (call :HELP)
 IF [%option%]==[start]  (call :MAKE && call :START)
 IF [%option%]==[run]    (call :MAKE && call :RUN)
+IF [%option%]==[test]   (call :MAKE && call :TEST)
 IF [%option%]==[clean]  (call :CLEAN)
 goto END
 
 REM **** RULES ****
 
 :HELP
-echo ***********************************************************
-echo ** ./Makefile.bat                                        **
-echo **     Executes MAKE rule (compile and link)             **
-echo **                                                       **
-echo ** ./Makefile.bat help                                   **
-echo **     Displays help informations                        **
-echo **                                                       **
-echo ** ./Makefile.bat start                                  **
-echo **     Executes MAKE rule and start in single window     **
-echo **                                                       **
-echo ** ./Makefile.bat run                                    **
-echo **     Executes MAKE rule and run executable in console  **
-echo **                                                       **
-echo ** ./Makefile.bat clean                                  **
-echo **     Delete /bin and /build directories                **
-echo ***********************************************************
+echo *********************************************************************
+echo ** ./Makefile.bat [tag]                                            **
+echo **     [no_tag] : Executes MAKE rule (compile and link)            **
+echo **     make     : Executes MAKE rule (compile and link)            **
+echo **     help     : Displays help informations                       **
+echo **     start    : Executes MAKE rule and start in single window    **
+echo **     run      : Executes MAKE rule and run executable in console **
+echo **     test     : Executes MAKE rule and run test file in console  **
+echo **     clean    : Delete /bin and /build directories               **
+echo *********************************************************************
 goto :EOF
 
 :MAKE
@@ -82,6 +79,15 @@ goto :EOF
 
 :RUN
 .\%BUILD_DIR%\%EXEC%
+goto :EOF
+
+:TEST
+echo    COMPILING %TEST_DIR%/%MAIN%.cpp INTO %BIN_DIR%/test.%MAIN%.o
+g++ -c %TEST_DIR%/%MAIN%.cpp -o %BIN_DIR%/test.%MAIN%.o
+echo.
+echo    LINKING %BUILD_DIR%/test.%EXEC% FROM %BIN_DIR%/test.%MAIN%.o AND %DEPENDANCIES%
+g++ -o %BUILD_DIR%/test.%EXEC% %BIN_DIR%/test.%MAIN%.o %DEPENDANCIES%
+.\%BUILD_DIR%\test.%EXEC%
 goto :EOF
 
 :CLEAN
