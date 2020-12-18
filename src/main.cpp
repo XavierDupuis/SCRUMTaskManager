@@ -32,13 +32,18 @@ int main() {
     controller.inputAndAddTask();
 
     cout << taskManager << endl;
-    controller.removeTask();
+
+    try 
+    {
+        controller.removeTask();
+    }
+    catch (TaskNotFound& except) 
+    {
+        cout << except.what() << endl;
+    }
     cout << taskManager << endl;
 
     cout << " - - - END PROGRAM MAIN - - - " << endl;
-    // Next 2 lines are for single window behavior
-    cout << " - - - CTRL+C TO ABORT - - - " << endl;
-    while (true) {}
-
+    
     return 0;
 }

@@ -4,6 +4,8 @@
 #include <iostream>
 
 #include "TaskManager.h"
+#include "TaskNotFound.h"
+#include "InvalidInput.h"
 
 class Controller 
 {
