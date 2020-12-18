@@ -1,11 +1,22 @@
 # SCRUMTaskManager
 
-## WINDOWS
-#    ./Makefile.bat
-#       Generates object files in /win directory
-#       and program.exe in /build directory
+SCRUM Task Manager with a Knapsack problem solution 
 
-## LINUX
-#    make
-#       Generates object files in /linux directory
-#       and program.out in /build directory
+## WINDOWS
+Use the following command to compile and run on windows
+```bash
+./Makefile.bat run
+```
+Executes MAKE rule and run executable in console
+    (Compile /src files and create executable)
+
+## LINUX & MAC
+Use the following command to compile and run on linux and mac
+```bash
+make run
+```
+Executes MAKE rule and run executable in console
+    (Compile /src files and create executable)
+
+## License
+[MIT](https://choosealicense.com/licenses/mit/)
