@@ -30,7 +30,7 @@ echo    make %option%
 echo.
 
 IF [%option%]==[]       (call :MAKE)
-IF [%option%]==[make]       (call :MAKE)
+IF [%option%]==[make]   (call :MAKE)
 IF [%option%]==[help]   (call :HELP)
 IF [%option%]==[start]  (call :MAKE && call :START)
 IF [%option%]==[run]    (call :MAKE && call :RUN)
