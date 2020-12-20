@@ -5,6 +5,34 @@ Controller::Controller(TaskManager& taskManager)
 {
 }
 
+void Controller::menu()
+{
+    std::cout << std::endl << std::endl << options_.second << std::endl;
+    unsigned option = input<unsigned>("Option");
+    if (option < 1 || option > options_.first)
+    {
+        InvalidInput("ERROR : Option not in range 1 to " + std::to_string(options_.first)).raise();
+    }
+    switch (option) 
+    {
+    case 1:
+        taskManager_.displayTasks();
+        break;
+    case 2:
+        inputAndAddTask();
+        break;
+    case 3:
+        
+        break;
+    case 4:
+        removeTask();
+        break;
+    default:
+        std::cout << "Not an option" << std::endl;
+        break;
+    }
+}
+
 bool Controller::inputAndAddTask()
 {
     std::string name;
@@ -49,8 +77,7 @@ bool Controller::removeTask()
 
     if (!taskManager_.RemoveTask(id)) 
     {
-        TaskNotFound except("ERROR : Task with id \"" + std::to_string(id) + "\" could not be found");
-        except.raise();
+        TaskNotFound("ERROR : Task with id \"" + std::to_string(id) + "\" could not be found").raise();
     }
     std::cout << "Task with id \"" << id << "\" deleted" << std::endl;
     return true;
@@ -66,7 +93,7 @@ T Controller::input(std::string query)
     {
         std::cin.clear();
         std::cin.ignore(80,'\n');
-        InvalidInput except("ERROR : Invalid Input for \"" + query + "\"");
+        InvalidInput except("ERROR : Invalid Input for \"" + query + "\". Not of type <" + "..." + ">");
         except.raise();
     }
     return input;
