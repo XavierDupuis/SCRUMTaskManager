@@ -17,12 +17,15 @@ public:
     bool UpdateTask(unsigned long& id, unsigned weight, unsigned value);
     bool RemoveTask(const unsigned long& id);
 
-    friend std::ostream& operator<<(std::ostream& out, const TaskManager& taskManager);
+    friend std::ostream& operator<<(std::ostream& out,
+    				    const TaskManager& taskManager);
+    
     void displayTasks();
 
     void createTimeTable();
 
 private:
+    void sortTasks();
     unsigned iterPeriod_;
     unsigned maxEffortByPeriod_;
     std::vector<std::unique_ptr<Task>> tasks_;
