@@ -29,6 +29,19 @@ int main() {
     taskManager.AddTask(make_unique<Task>("taskUseless", 99, 666));
     taskManager.AddTask(make_unique<Task>("taskTrash", 35, 999));
 
+    while (true)
+    {
+        try 
+        {
+            controller.menu();
+        } 
+        catch (InvalidInput& except)
+        {
+            cout << except.what() << endl;
+        }
+
+    }
+
     controller.inputAndAddTask();
 
     cout << taskManager << endl;
