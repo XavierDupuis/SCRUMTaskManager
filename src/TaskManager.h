@@ -32,7 +32,7 @@ private:
     unsigned iterationWeight_;
     unsigned maxEffortByPeriod_;
     std::vector<std::unique_ptr<Task>> tasks_;
-    std::vector<std::vector<std::unique_ptr<Task>>> timeTable_;
+    std::vector<std::unique_ptr<Iteration>> timeTable_;
 };
 
 #endif // TASKMANAGER_H

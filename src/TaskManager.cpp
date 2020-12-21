@@ -102,13 +102,13 @@ void TaskManager::createTimeTable()
         unique_ptr<Iteration> iteration = make_unique<Iteration>();
         for (auto it = tasksToPlace.begin(); it != tasksToPlace.end(); it++)
         {
-            if ((*it)->weight) > iterationWeight_)
+            if ((*it)->weight > iterationWeight_)
             {
                 tasksToPlace.erase(it);
                 it--;
             }
             
-            if ((*it)->weight) + iteration->totalWeight <= iterationWeight_)
+            if ((*it)->weight + iteration->totalWeight <= iterationWeight_)
             {
                 iteration->addTask(*it);
                 tasksToPlace.erase(it);
