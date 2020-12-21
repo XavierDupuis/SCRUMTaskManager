@@ -80,7 +80,7 @@ void TaskManager::displayTimeTable()
     std::cout << " TaskManager Tasks : " << std::endl;
     for (auto& iteration : timeTable_)
     {
-        std::cout << iteration << std::endl;
+        std::cout << *iteration << std::endl;
     }
 }
 

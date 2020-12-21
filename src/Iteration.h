@@ -3,18 +3,17 @@
 
 #include <string>
 #include <vector>
+#include <ostream>
 
 #include "Task.h"
 
 struct Iteration
 {
-    Iteration() : totalWeight(0) {}
+    Iteration();
 
-    void addTask(const Task* taskPtr)
-    {
-        totalWeight += taskPtr->weight;
-        tasks.push_back(taskPtr);
-    }
+    void addTask(const Task* taskPtr);
+
+    friend std::ostream& operator<<(std::ostream& out, const Iteration& iteration);
     
     int totalWeight;
     std::vector<const Task*> tasks;
