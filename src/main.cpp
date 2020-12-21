@@ -17,6 +17,7 @@
 #include "Task.h"
 #include "TaskManager.h"
 #include "Controller.h"
+#include "CSVHandler.h"
 
 using namespace std;
 
@@ -39,22 +40,11 @@ int main() {
         {
             cout << except.what() << endl;
         }
-
+        catch (TaskNotFound& except)
+        {
+            cout << except.what() << endl;
+        }
     }
-
-    controller.inputAndAddTask();
-
-    cout << taskManager << endl;
-
-    try 
-    {
-        controller.removeTask();
-    }
-    catch (TaskNotFound& except) 
-    {
-        cout << except.what() << endl;
-    }
-    cout << taskManager << endl;
 
     cout << " - - - END PROGRAM MAIN - - - " << endl;
     

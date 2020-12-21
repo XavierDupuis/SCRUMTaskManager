@@ -6,6 +6,7 @@
 #include <memory>
 #include <iostream>
 
+#include "Iteration.h"
 #include "Task.h"
 
 class TaskManager
@@ -17,6 +18,8 @@ public:
     bool UpdateTask(unsigned long& id, unsigned weight, unsigned value);
     bool RemoveTask(const unsigned long& id);
 
+    std::vector<std::unique_ptr<Task>>& getTasks();
+
     friend std::ostream& operator<<(std::ostream& out,
     				    const TaskManager& taskManager);
     
@@ -26,7 +29,7 @@ public:
 
 private:
     void sortTasks();
-    unsigned iterPeriod_;
+    unsigned iterationWeight_;
     unsigned maxEffortByPeriod_;
     std::vector<std::unique_ptr<Task>> tasks_;
     std::vector<std::vector<std::unique_ptr<Task>>> timeTable_;

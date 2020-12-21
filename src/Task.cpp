@@ -33,3 +33,13 @@ void Task::actualiseNetValue()
         netValue = double(value)/weight;
     }
 }
+
+void Task::setIdCounter(unsigned newID)
+{
+    idCounter = newID;
+}
+
+void Task::resetIdCounter()
+{
+    setIdCounter(0);
+}

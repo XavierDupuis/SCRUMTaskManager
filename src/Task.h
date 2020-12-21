@@ -18,6 +18,8 @@ struct Task
     unsigned id;
 
     static unsigned idCounter;
+    static void setIdCounter(unsigned newID);
+    static void resetIdCounter();
 
 private:
     void actualiseNetValue();

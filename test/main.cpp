@@ -17,33 +17,36 @@
 #include "../src/Task.h"
 #include "../src/TaskManager.h"
 #include "../src/Controller.h"
+#include "../src/CSVHandler.h"
 
 using namespace std;
 
+#include <fstream>
+
 int main() {
-    cout << " - - - BEGIN TEST MAIN - - - " << endl;
     TaskManager taskManager = TaskManager(3, 60);
     Controller controller(taskManager);
 
-    taskManager.AddTask(make_unique<Task>("taskTest1", 12, 123));
-    taskManager.AddTask(make_unique<Task>("taskTest2", 99, 666));
-    taskManager.AddTask(make_unique<Task>("taskTest3", 35, 999));
+    taskManager.AddTask(make_unique<Task>("taskUsefull", 12, 123));
+    taskManager.AddTask(make_unique<Task>("taskUseless", 99, 666));
+    taskManager.AddTask(make_unique<Task>("taskTrash", 35, 999));
 
-    controller.inputAndAddTask();
+    CSVHandler csvHandler("data.csv");
+    csvHandler.writeFile(taskManager);
 
-    cout << taskManager << endl;
-
-    try 
+    while (true)
     {
-        controller.removeTask();
+        try 
+        {
+            controller.menu();
+        } 
+        catch (InvalidInput& except)
+        {
+            cout << except.what() << endl;
+        }
+        catch (TaskNotFound& except)
+        {
+            cout << except.what() << endl;
+        }
     }
-    catch (TaskNotFound& except) 
-    {
-        cout << except.what() << endl;
-    }
-    cout << taskManager << endl;
-
-    cout << " - - - END TEST MAIN - - - " << endl;
-    
-    return 0;
 }
