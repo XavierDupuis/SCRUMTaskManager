@@ -75,13 +75,13 @@ void TaskManager::displayTasks()
     }
 }
 
-void TaskManager::sortTasks()
+void TaskManager::displayTimeTable()
 {
-	std::sort(tasks_.begin(), tasks_.end(), [](const std::unique_ptr<Task>& task1,
-						   const std::unique_ptr<Task>& task2)
-	{
-		return task1->netValue > task2->netValue;
-	});
+    std::cout << " TaskManager Tasks : " << std::endl;
+    for (auto& iteration : timeTable_)
+    {
+        std::cout << iteration << std::endl;
+    }
 }
 
 void TaskManager::createTimeTable()
@@ -117,4 +117,13 @@ void TaskManager::createTimeTable()
         }
         timeTable_.push_back(move(iteration));
     }
+}
+
+void TaskManager::sortTasks()
+{
+	std::sort(tasks_.begin(), tasks_.end(), [](const std::unique_ptr<Task>& task1,
+						   const std::unique_ptr<Task>& task2)
+	{
+		return task1->netValue > task2->netValue;
+	});
 }

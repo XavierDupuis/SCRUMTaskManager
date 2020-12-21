@@ -24,7 +24,8 @@ public:
     				    const TaskManager& taskManager);
     
     void displayTasks();
-
+    void displayTimeTable();
+    
     void createTimeTable();
 
 private:
