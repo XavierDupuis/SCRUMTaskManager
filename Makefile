@@ -17,6 +17,7 @@ LDFLAGS=-lm
 SRC_DIR=src
 BIN_DIR=bin
 BUILD_DIR=build
+TEST_DIR=test
 EXEC=program.out
 
 SOURCES=$(sort $(shell find $(SRC_DIR) -name '*.cpp'))
@@ -35,6 +36,11 @@ $(BIN_DIR)/%.o: $(SRC_DIR)/%.cpp # $(SRC_DIR)/%.h
 
 run: all
 	./$(BUILD_DIR)/$(EXEC)
+
+test: all
+	$(CC) -o $(BIN_DIR)/test.main.o -c $(TEST_DIR)/main.cpp $(CFLAGS) $(CCFLAGS)
+	$(CC) -o $(BUILD_DIR)/test.$(EXEC) $(BIN_DIR)/test.main.o $(LDFLAGS) $(CCFLAGS)
+	./$(BUILD_DIR)/test.$(EXEC)
 
 clean:
 	rm -rf $(BUILD_DIR)

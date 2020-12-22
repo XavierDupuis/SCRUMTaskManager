@@ -99,7 +99,6 @@ void TaskManager::displayTimeTable()
 void TaskManager::createTimeTable()
 {
     timeTable_.clear();
-
     vector<const Task*> tasksToPlace;
     auto funcUniqueToPtr = [](const unique_ptr<Task>& taskptr) {return taskptr.get();};
     
@@ -119,8 +118,7 @@ void TaskManager::createTimeTable()
                 tasksToPlace.erase(it);
                 it--;
             }
-            
-            if ((*it)->weight + iteration->totalWeight <= iterationWeight_)
+            else if ((*it)->weight + iteration->totalWeight <= iterationWeight_)
             {
                 iteration->addTask(*it);
                 tasksToPlace.erase(it);
