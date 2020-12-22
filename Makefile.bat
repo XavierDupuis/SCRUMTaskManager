@@ -19,7 +19,7 @@ echo.
 
 REM COMPILER AND FLAGS
 set CC=g++
-set CCFLAGS = -std=c++17
+set CCFLAGS=-std=c++17
 set CFLAGS=-W -Wall -ansi -pedantic
 set LDFLAGS=-lm
 

@@ -19,7 +19,7 @@ struct Iteration
     std::vector<const Task*> tasks;
 
     unsigned id;
-    static unsigned Counter;
+    static inline unsigned Counter = 0;
 };
 
 #endif // ITERATION_H

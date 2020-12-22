@@ -4,8 +4,6 @@ Iteration::Iteration() : totalWeight(0), id(Counter++)
 {
 }
 
-unsigned Iteration::Counter = 0;
-
 void Iteration::addTask(const Task* taskPtr)
 {
     totalWeight += taskPtr->weight;
@@ -14,7 +12,7 @@ void Iteration::addTask(const Task* taskPtr)
 
 std::ostream& operator<<(std::ostream& out, const Iteration& iteration)
 {
-    out << "Iteration " << iteration.id << " : ";
+    out << "Iteration " << iteration.id << " : " << std::endl;
     for (auto& task : iteration.tasks)
     {
         out << "    " << task->name << std::endl;
