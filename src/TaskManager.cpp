@@ -5,7 +5,7 @@ TaskManager::TaskManager(unsigned iterationWeight, unsigned iterationPeriod)
 {
 }
 
-bool TaskManager::AddTask(std::unique_ptr<Task> task)
+bool TaskManager::addTask(std::unique_ptr<Task> task)
 {
     if (task != nullptr)
     {
@@ -15,17 +15,17 @@ bool TaskManager::AddTask(std::unique_ptr<Task> task)
     return false;
 }
 
-bool TaskManager::UpdateTask(unsigned long& id, unsigned weight, unsigned value)
+bool TaskManager::updateTask(std::unique_ptr<Task> task)
 {
-    auto pos = std::find_if(tasks_.begin(), tasks_.end(), [&id](std::unique_ptr<Task>& task)
+    //Task::idCounter--;
+    auto pos = std::find_if(tasks_.begin(), tasks_.end(), [&task](std::unique_ptr<Task>& vectorTask)
     {
-        return task->id_ == id;
+        return vectorTask->name_ == task->name_;
     });
     
     if (pos != tasks_.end())
     {
-        (*pos)->weight_ = weight;
-        (*pos)->value_ = value;
+        *pos = std::move(task);
         return true;
     }
     return false;
@@ -36,7 +36,7 @@ std::vector<std::unique_ptr<Task>>& TaskManager::getTasks()
     return tasks_;
 }
 
-bool TaskManager::RemoveTask(const unsigned long& id)
+bool TaskManager::removeTask(const unsigned long& id)
 {
     auto pos = std::find_if(tasks_.begin(), tasks_.end(), [&id](std::unique_ptr<Task>& task)
     {

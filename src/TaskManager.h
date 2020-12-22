@@ -14,9 +14,9 @@ class TaskManager
 public:
     TaskManager(unsigned iterationWeight, unsigned iterationPeriod);
     
-    bool AddTask(std::unique_ptr<Task> task);
-    bool UpdateTask(unsigned long& id, unsigned weight, unsigned value);
-    bool RemoveTask(const unsigned long& id);
+    bool addTask(std::unique_ptr<Task> task);
+    bool updateTask(std::unique_ptr<Task> task);
+    bool removeTask(const unsigned long& id);
 
     std::vector<std::unique_ptr<Task>>& getTasks();
 

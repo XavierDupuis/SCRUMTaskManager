@@ -4,7 +4,7 @@
 
 unsigned Task::idCounter = 0;
 
-size_t Task::MaxNameLenght = 0;
+size_t Task::MaxNameLenght = 4;
 
 Task::Task(std::string name, unsigned weight, unsigned value) : 
     name_(name), 

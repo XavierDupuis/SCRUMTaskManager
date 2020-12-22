@@ -14,9 +14,10 @@ public:
 
     bool menu();
 
-    bool inputTask();
+    std::unique_ptr<Task> inputTask();
     bool editTask();
     bool removeTask();
+    bool updateTask();
 
 private:
     template<typename T>

@@ -20,11 +20,10 @@ bool Controller::menu()
         taskManager_.displayTasks();
         break;
     case 2:
-        inputTask();
-        //taskManager_.AddTask()
+        taskManager_.addTask(inputTask());
         break;
     case 3:
-        //Update task, but need input from controller
+        taskManager_.updateTask(inputTask());
         break;
     case 4:
         removeTask();
@@ -42,7 +41,7 @@ bool Controller::menu()
     return exit;
 }
 
-bool Controller::inputTask()
+std::unique_ptr<Task> Controller::inputTask()
 {
     std::string name;
     unsigned value;
@@ -63,7 +62,7 @@ bool Controller::inputTask()
         }
     }
     std::cout << std::endl;
-    return taskManager_.AddTask(std::make_unique<Task>(name,weight,value));
+    return std::make_unique<Task>(name,weight,value);
 } 
 
 bool Controller::removeTask()
@@ -84,11 +83,16 @@ bool Controller::removeTask()
         }
     }
 
-    if (!taskManager_.RemoveTask(id)) 
+    if (!taskManager_.removeTask(id)) 
     {
         TaskNotFound("ERROR : Task with id \"" + std::to_string(id) + "\" could not be found").raise();
     }
     std::cout << "Task with id \"" << id << "\" deleted" << std::endl;
+    return true;
+}
+
+bool updateTask()
+{
     return true;
 }
 
@@ -102,7 +106,7 @@ T Controller::input(std::string query)
     {
         std::cin.clear();
         std::cin.ignore(80,'\n');
-        InvalidInput except("ERROR : Invalid Input for \"" + query + "\". Not of type <" + "..." + ">");
+        InvalidInput except("ERROR : Invalid Input for \"" + query + "\". Not of type <" + typeid(T).name() + ">");
         except.raise();
     }
     return input;

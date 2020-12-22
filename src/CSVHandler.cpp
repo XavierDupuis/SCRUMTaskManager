@@ -37,7 +37,7 @@ bool CSVHandler::readFile(TaskManager& taskManager)
         stream.ignore();
         stream >> value;
         stream.ignore();
-        taskManager.AddTask(std::make_unique<Task>(name, weight, value));
+        taskManager.addTask(std::make_unique<Task>(name, weight, value));
     }
     f.close();
     return true;
