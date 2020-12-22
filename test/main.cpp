@@ -23,8 +23,10 @@
 using namespace std;
 
 
-int main() {
-    TaskManager taskManager = TaskManager(3, 60);
+int main() 
+{
+    cout << " - - - BEGIN TEST MAIN - - - " << endl;
+    TaskManager taskManager = TaskManager(60, 3);
     Controller controller(taskManager);
 
     CSVHandler csvHandler("data.csv");
@@ -45,6 +47,15 @@ int main() {
         {
             cout << except.what() << endl;
         }
+        catch (BadFileAccess& except)
+        {
+            cout << except.what() << endl;
+            exit = true;
+        }
     }
     csvHandler.writeFile(taskManager);
+
+    cout << " - - - END TEST MAIN - - - " << endl;
+    
+    return 0;
 }
