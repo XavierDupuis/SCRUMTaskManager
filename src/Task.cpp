@@ -4,31 +4,38 @@
 
 unsigned Task::idCounter = 0;
 
-Task::Task(std::string name, unsigned weight, unsigned value)
+size_t Task::MaxNameLenght = 0;
+
+Task::Task(std::string name, unsigned weight, unsigned value) : 
+    name_(name), 
+    weight_(weight),
+    value_(value),
+    id_(idCounter++)
 {
-    this->name = name;
-    this->weight = weight;
-    this->value = value;
-    this->id = idCounter++;
     actualiseNetValue();
+    Task::setMaxNameLenght(std::max(MaxNameLenght, name.size()));
 }
 
 std::ostream& operator<<(std::ostream& out, const Task& task)
 {
-    out << std::left << "id : " << std::setw(5) << task.id << std::setw(20) << task.name << " :   weight = " << task.weight 
-        << "  |  value =  " << task.value;
+    out << std::left 
+        << std::setw(5) << task.id_ 
+        << std::setw(Task::MaxNameLenght+2) << task.name_ 
+        << std::setw(10) << task.weight_ 
+        << std::setw(10) << task.value_
+        << std::setw(10) << task.ratioWV_;
     return out;
 }
 
 void Task::actualiseNetValue()
 {
-    if (weight == 0)
+    if (weight_ == 0)
     {
-        netValue = std::numeric_limits<double>::max();
+        ratioWV_ = std::numeric_limits<double>::max();
     }
     else
     {
-        netValue = double(value)/weight;
+        ratioWV_ = double(value_)/weight_;
     }
 }
 
@@ -40,4 +47,9 @@ void Task::setIdCounter(unsigned newID)
 void Task::resetIdCounter()
 {
     setIdCounter(0);
+}
+
+void Task::setMaxNameLenght(size_t newMaxNameLenght)
+{
+    MaxNameLenght = newMaxNameLenght;
 }

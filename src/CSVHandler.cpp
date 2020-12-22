@@ -53,9 +53,9 @@ bool CSVHandler::writeFile(TaskManager& taskManager)
     f << "NAME;WEIGHT;VALUE\n";
     for(auto& it : taskManager.getTasks())
     {
-        f << it.get()->name     << ";" << 
-             it.get()->weight   << ";" << 
-             it.get()->value    << std::endl;
+        f << it.get()->name_     << ";" << 
+             it.get()->weight_   << ";" << 
+             it.get()->value_    << std::endl;
     }
     f.close();
     return true;

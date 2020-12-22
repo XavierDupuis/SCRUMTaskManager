@@ -20,7 +20,8 @@ bool Controller::menu()
         taskManager_.displayTasks();
         break;
     case 2:
-        inputAndAddTask();
+        inputTask();
+        //taskManager_.AddTask()
         break;
     case 3:
         //Update task, but need input from controller
@@ -41,7 +42,7 @@ bool Controller::menu()
     return exit;
 }
 
-bool Controller::inputAndAddTask()
+bool Controller::inputTask()
 {
     std::string name;
     unsigned value;

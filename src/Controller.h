@@ -14,7 +14,8 @@ public:
 
     bool menu();
 
-    bool inputAndAddTask();
+    bool inputTask();
+    bool editTask();
     bool removeTask();
 
 private:

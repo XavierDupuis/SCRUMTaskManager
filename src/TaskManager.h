@@ -20,9 +20,7 @@ public:
 
     std::vector<std::unique_ptr<Task>>& getTasks();
 
-    friend std::ostream& operator<<(std::ostream& out,
-    				    const TaskManager& taskManager);
-    
+    friend std::ostream& operator<<(std::ostream& out, const TaskManager& taskManager);
     void displayTasks();
     void displayTimeTable();
     
@@ -30,9 +28,13 @@ public:
 
 private:
     void sortTasks();
+
     unsigned iterationWeight_;
     unsigned iterationPeriod_;
     std::vector<std::unique_ptr<Task>> tasks_;
+
+    std::vector<const Task*> orderedTasksByRatio_;
+    std::vector<const Task*> tasksTooHeavy_;
     std::vector<std::unique_ptr<Iteration>> timeTable_;
 };
 
