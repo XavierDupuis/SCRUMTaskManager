@@ -17,7 +17,6 @@ bool CSVHandler::readFile(TaskManager& taskManager)
 
     // Remove header
     f >> header;
-    std::cout << header << std::endl;
     f.ignore();
     
     // Reset ID Counter
@@ -40,7 +39,6 @@ bool CSVHandler::readFile(TaskManager& taskManager)
         stream.ignore();
         taskManager.AddTask(std::make_unique<Task>(name, weight, value));
     }
-
     f.close();
     return true;
 }

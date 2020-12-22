@@ -44,6 +44,11 @@ int main() {
         {
             cout << except.what() << endl;
         }
+        catch (BadFileAccess& except)
+        {
+            cout << except.what() << endl;
+            exit = true;
+        }
     }
     csvHandler.writeFile(taskManager);
 

@@ -15,9 +15,7 @@ Task::Task(std::string name, unsigned weight, unsigned value)
 
 std::ostream& operator<<(std::ostream& out, const Task& task)
 {
-    //sprintf();
-    
-    out << "id : " << task.id << std::setw(15) << task.name << " : weight = " << task.weight 
+    out << std::left << "id : " << std::setw(5) << task.id << std::setw(20) << task.name << " :   weight = " << task.weight 
         << "  |  value =  " << task.value;
     return out;
 }
