@@ -9,7 +9,7 @@ bool Controller::menu()
 {
     std::cout << std::endl << std::endl << options_.second << std::endl;
     unsigned option = input<unsigned>("Option");
-    if (option < 0 || option > options_.first-1)
+    if (option > options_.first-1)
     {
         InvalidInput("ERROR : Option not in range 0 to " + std::to_string(options_.first-1)).raise();
     }

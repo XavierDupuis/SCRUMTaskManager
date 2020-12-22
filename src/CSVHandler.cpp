@@ -2,7 +2,8 @@
 
 CSVHandler::CSVHandler(std::string filename = "data.csv") 
     : filename_(filename) 
-{};
+{
+}
 
 bool CSVHandler::readFile(TaskManager& taskManager)
 {
@@ -13,6 +14,7 @@ bool CSVHandler::readFile(TaskManager& taskManager)
     }
     std::string header;
     f >> header;
+    f.ignore();
 
     std::vector<std::unique_ptr<Task>> tasks;
     
@@ -33,7 +35,7 @@ bool CSVHandler::readFile(TaskManager& taskManager)
         stream >> weight;
         stream.ignore();
         stream >> value;
-        stream.ignore();
+        stream.ignore(2);
         
         taskManager.AddTask(std::make_unique<Task>(name, weight, value));
     }
@@ -50,14 +52,13 @@ bool CSVHandler::writeFile(TaskManager& taskManager)
     {
         BadFileAccess("File " + filename_ + " couldn't be open.").raise();
     }
-    f << "NAME;WEIGHT;VALUE;";
+    f << "NAME;WEIGHT;VALUE;\n";
     for(auto& it : taskManager.getTasks())
     {
         f << 
-             //it->id << ";" << 
      "\"" << it.get()->name << "\"" << ";" << 
              it.get()->weight << ";" << 
-             it.get()->value << ";";
+             it.get()->value << ";" << std::endl;
     }
     f.close();
     return true;
