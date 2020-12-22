@@ -23,6 +23,7 @@ set CCFLAGS=-std=c++17
 set CFLAGS=-W -Wall -ansi -pedantic
 set LDFLAGS=-lm
 
+REM LOCAL DIRECTORIES AND FILES
 set SRC_DIR=src
 set BIN_DIR=bin
 set BUILD_DIR=build
@@ -31,10 +32,12 @@ set MAIN=main
 set SRCFILESEXT=*.cpp *.c
 set EXEC=program.exe
 
+REM GET OPTION
 set option=%1
 echo    make %option%
 echo.
 
+REM DISPATCHING
 IF [%option%]==[]       (call :MAKE)
 IF [%option%]==[make]   (call :MAKE)
 IF [%option%]==[help]   (call :HELP)
@@ -45,7 +48,6 @@ IF [%option%]==[clean]  (call :CLEAN)
 goto END
 
 REM **** RULES ****
-
 :HELP
 echo *********************************************************************
 echo ** ./Makefile.bat [tag]                                            **
