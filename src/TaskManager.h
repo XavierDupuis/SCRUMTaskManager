@@ -12,7 +12,7 @@
 class TaskManager
 {
 public:
-    TaskManager(unsigned iterPeriod, unsigned maxEffortByPeriod);
+    TaskManager(unsigned iterationWeight, unsigned iterationPeriod);
     
     bool AddTask(std::unique_ptr<Task> task);
     bool UpdateTask(unsigned long& id, unsigned weight, unsigned value);
@@ -31,7 +31,7 @@ public:
 private:
     void sortTasks();
     unsigned iterationWeight_;
-    unsigned maxEffortByPeriod_;
+    unsigned iterationPeriod_;
     std::vector<std::unique_ptr<Task>> tasks_;
     std::vector<std::unique_ptr<Iteration>> timeTable_;
 };

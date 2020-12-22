@@ -23,10 +23,14 @@ bool Controller::menu()
         inputAndAddTask();
         break;
     case 3:
-        
+        //Update task, but need input from controller
         break;
     case 4:
         removeTask();
+        break;
+    case 5:
+        taskManager_.createTimeTable();
+        taskManager_.displayTimeTable();
         break;
     case 0:
     default:

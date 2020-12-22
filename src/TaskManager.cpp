@@ -2,8 +2,8 @@
 
 using namespace std;
 
-TaskManager::TaskManager(unsigned iterPeriod, unsigned maxEffortByPeriod)
-    : iterationWeight_(iterPeriod), maxEffortByPeriod_(maxEffortByPeriod)
+TaskManager::TaskManager(unsigned iterationWeight, unsigned iterationPeriod)
+    : iterationWeight_(iterationWeight), iterationPeriod_(iterationPeriod)
 {
 }
 
@@ -33,7 +33,6 @@ bool TaskManager::UpdateTask(unsigned long& id, unsigned weight, unsigned value)
     return false;
 }
 
-//std::vector<const Task*>
 std::vector<std::unique_ptr<Task>>& TaskManager::getTasks()
 {
     return tasks_;
@@ -48,8 +47,6 @@ bool TaskManager::RemoveTask(const unsigned long& id)
     
     if (pos != tasks_.end())
     {
-        /*std::iter_swap(pos, tasks_.end()-1);
-        tasks_.pop_back();*/
         tasks_.erase(remove(tasks_.begin(), tasks_.end(), *pos));
         return true;
     }
@@ -58,6 +55,11 @@ bool TaskManager::RemoveTask(const unsigned long& id)
 
 std::ostream& operator<<(std::ostream& out, const TaskManager& taskManager)
 {
+    if (taskManager.tasks_.size() == 0)
+    {
+        out << "No tasks in TaskManager." << std::endl;
+        return out;
+    }
     out << " TaskManager Tasks : " << std::endl;
     for (auto& it : taskManager.tasks_)
     {

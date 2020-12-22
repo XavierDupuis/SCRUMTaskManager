@@ -17,6 +17,9 @@ struct Iteration
     
     int totalWeight;
     std::vector<const Task*> tasks;
+
+    unsigned id;
+    static unsigned Counter;
 };
 
 #endif // ITERATION_H
