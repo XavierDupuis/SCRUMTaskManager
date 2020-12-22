@@ -17,6 +17,12 @@ title Makefile
 echo === MAKEFILE BEGIN ===
 echo.
 
+REM COMPILER AND FLAGS
+set CC=g++
+set CCFLAGS = -std=c++17
+set CFLAGS=-W -Wall -ansi -pedantic
+set LDFLAGS=-lm
+
 set SRC_DIR=src
 set BIN_DIR=bin
 set BUILD_DIR=build
@@ -61,7 +67,7 @@ cd %SRC_DIR%
 set DEPENDANCIES=
 for %%f in (%SRCFILESEXT%) do (
     echo    COMPILING %%f INTO %%~nf.o
-    g++ -c %%f -o ../%BIN_DIR%/%%~nf.o
+    %CC% -c %%f -o ../%BIN_DIR%/%%~nf.o %CFFLAGS% %CCFLAGS%
     if NOT [%%~nf]==[%MAIN%] (
         set DEPENDANCIES=!DEPENDANCIES!%BIN_DIR%/%%~nf.o 
     )
@@ -69,7 +75,7 @@ for %%f in (%SRCFILESEXT%) do (
 echo.
 cd ..
 echo    LINKING %BUILD_DIR%/%EXEC% FROM %BIN_DIR%/%MAIN%.o AND %DEPENDANCIES%
-g++ -o %BUILD_DIR%/%EXEC% %BIN_DIR%/%MAIN%.o %DEPENDANCIES%
+%CC% -o %BUILD_DIR%/%EXEC% %BIN_DIR%/%MAIN%.o %DEPENDANCIES% %LDFLAGS% %CCFLAGS%
 echo.
 goto :EOF
 
@@ -83,10 +89,10 @@ goto :EOF
 
 :TEST
 echo    COMPILING %TEST_DIR%/%MAIN%.cpp INTO %BIN_DIR%/test.%MAIN%.o
-g++ -c %TEST_DIR%/%MAIN%.cpp -o %BIN_DIR%/test.%MAIN%.o
+%CC% -c %TEST_DIR%/%MAIN%.cpp -o %BIN_DIR%/test.%MAIN%.o %CFFLAGS% %CCFLAGS%
 echo.
 echo    LINKING %BUILD_DIR%/test.%EXEC% FROM %BIN_DIR%/test.%MAIN%.o AND %DEPENDANCIES%
-g++ -o %BUILD_DIR%/test.%EXEC% %BIN_DIR%/test.%MAIN%.o %DEPENDANCIES%
+%CC% -o %BUILD_DIR%/test.%EXEC% %BIN_DIR%/test.%MAIN%.o %DEPENDANCIES% %LDFLAGS% %CCFLAGS%
 .\%BUILD_DIR%\test.%EXEC%
 goto :EOF
 

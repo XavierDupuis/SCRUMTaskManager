@@ -4,10 +4,11 @@
 #include <iostream>
 #include <vector>
 #include <fstream>
+#include <sstream>
 
 #include "Task.h"
 #include "TaskManager.h"
-#include "FileNotFound.h"
+#include "ExceptBadFileAccess.h"
 
 class CSVHandler 
 {

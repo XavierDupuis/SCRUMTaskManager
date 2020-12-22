@@ -9,7 +9,7 @@ bool CSVHandler::readFile(TaskManager& taskManager)
     std::ifstream f(filename_);
     if(!f)
     {
-        FileNotFound("File" + filename_ + "not found").raise();
+        BadFileAccess("File " + filename_ + " not found").raise();
     }
     std::string header;
     f >> header;
@@ -17,21 +17,28 @@ bool CSVHandler::readFile(TaskManager& taskManager)
     std::vector<std::unique_ptr<Task>> tasks;
     
     //std::string stringId;
-    std::string stringName;
-    std::string stringWeight;
-    std::string stringValue;
+    std::string name;
+    unsigned weight;
+    unsigned value;
     
     Task::resetIdCounter();
 
-    while(f.peek() != EOF) 
+    std::string ligne;
+    while(std::getline(f,ligne)) 
     {
-        //getline(f,stringId,';');
-        getline(f,stringName,';');
-        getline(f,stringWeight,';');
-        getline(f,stringValue,';');
-        taskManager.AddTask(std::make_unique<Task>(stringName, stoul(stringWeight), stoul(stringValue)));
+        std::istringstream stream(ligne);
+
+        stream >> std::quoted(name);
+        stream.ignore();
+        stream >> weight;
+        stream.ignore();
+        stream >> value;
+        stream.ignore();
+        
+        taskManager.AddTask(std::make_unique<Task>(name, weight, value));
     }
-    
+
+
     f.close();
     return true;
 }
@@ -39,15 +46,18 @@ bool CSVHandler::readFile(TaskManager& taskManager)
 bool CSVHandler::writeFile(TaskManager& taskManager)
 {
     std::ofstream f(filename_);
-    f << "ID;NAME;WEIGHT;VALUE" << std::endl;
+    if(!f)
+    {
+        BadFileAccess("File " + filename_ + " couldn't be open.").raise();
+    }
+    f << "NAME;WEIGHT;VALUE;";
     for(auto& it : taskManager.getTasks())
     {
         f << 
              //it->id << ";" << 
-             it.get()->name << ";" << 
-             it.get()->value << ";" << 
-             it.get()->weight << std::endl;
-
+     "\"" << it.get()->name << "\"" << ";" << 
+             it.get()->weight << ";" << 
+             it.get()->value << ";";
     }
     f.close();
     return true;

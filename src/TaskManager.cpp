@@ -68,6 +68,11 @@ std::ostream& operator<<(std::ostream& out, const TaskManager& taskManager)
 
 void TaskManager::displayTasks()
 {
+    if (tasks_.size() == 0)
+    {
+        std::cout << "No tasks in TaskManager." << std::endl;
+        return;
+    }
     std::cout << " TaskManager Tasks : " << std::endl;
     for (auto& it : tasks_)
     {
@@ -77,6 +82,11 @@ void TaskManager::displayTasks()
 
 void TaskManager::displayTimeTable()
 {
+    if (tasks_.size() == 0)
+    {
+        std::cout << "No tasks in TaskManager." << std::endl;
+        return;
+    }
     std::cout << " TaskManager Tasks : " << std::endl;
     for (auto& iteration : timeTable_)
     {

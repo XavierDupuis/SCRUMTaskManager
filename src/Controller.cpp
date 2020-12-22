@@ -5,14 +5,15 @@ Controller::Controller(TaskManager& taskManager)
 {
 }
 
-void Controller::menu()
+bool Controller::menu()
 {
     std::cout << std::endl << std::endl << options_.second << std::endl;
     unsigned option = input<unsigned>("Option");
-    if (option < 1 || option > options_.first)
+    if (option < 0 || option > options_.first-1)
     {
-        InvalidInput("ERROR : Option not in range 1 to " + std::to_string(options_.first)).raise();
+        InvalidInput("ERROR : Option not in range 0 to " + std::to_string(options_.first-1)).raise();
     }
+    bool exit = false;
     switch (option) 
     {
     case 1:
@@ -27,10 +28,13 @@ void Controller::menu()
     case 4:
         removeTask();
         break;
+    case 0:
     default:
-        std::cout << "Not an option" << std::endl;
+        std::cout << "Exit" << std::endl;
+        exit = true;
         break;
     }
+    return exit;
 }
 
 bool Controller::inputAndAddTask()
