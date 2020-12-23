@@ -1,37 +1,15 @@
-## Welcome to GitHub Pages
+### Welcome
+The **"SCRUM Task Manager"** is a small project exploring C++ project developpement while using Linux/Windows portability makefiles. Version 1.0 is now available. A version 2.0, with Qt based user interface will available in the near future.
 
-You can use the [editor on GitHub](https://github.com/XavierDupuis/SCRUMTaskManager/edit/gh-pages/index.md) to maintain and preview the content for your website in Markdown files.
+Made by Xavier Dupuis and Olivier Saint-Cyr, Polytechnique Mtl.
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+## README
+[Readme](https://github.com/XavierDupuis/SCRUMTaskManager/blob/main/README.md) available on Github repository. It explains how to compile on Linux, Windows and MacOS.
 
-### Markdown
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+## License
+[Mit License](https://choosealicense.com/licenses/mit/)
 
-```markdown
-Syntax highlighted code block
-
-# Header 1
-## Header 2
-### Header 3
-
-- Bulleted
-- List
-
-1. Numbered
-2. List
-
-**Bold** and _Italic_ and `Code` text
-
-[Link](url) and ![Image](src)
-```
-
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
-
-### Jekyll Themes
-
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/XavierDupuis/SCRUMTaskManager/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
-
-### Support or Contact
-
-Having trouble with Pages? Check out our [documentation](https://docs.github.com/categories/github-pages-basics/) or [contact support](https://github.com/contact) and we’ll help you sort it out.
+## Support or Contact
+For any comments, bugs or possible improvements, contact :
+_xavier0978@hotmail.fr / saintcyr.olivier1@gmail.com_
