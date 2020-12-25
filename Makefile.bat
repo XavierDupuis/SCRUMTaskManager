@@ -1,4 +1,4 @@
-REM @echo off
+@echo off
 REM COMMENT PREVIOUS LINE FOR DEBUGGING PERSPECTIVE
 
 REM ***********************************************
