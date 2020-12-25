@@ -23,37 +23,10 @@ using namespace std;
 
 int main() 
 {
-    cout << " - - - BEGIN PROGRAM MAIN - - - " << endl;
+    // - - - BEGIN PROGRAM MAIN - - - 
     TaskManager taskManager = TaskManager(60, 3);
     Controller controller(taskManager);
-
-    CSVHandler csvHandler("data.csv");
-    csvHandler.readFile(taskManager);
-
-    bool exit = false;
-    while (!exit)
-    {
-        try 
-        {
-            exit = controller.menu();
-        } 
-        catch (InvalidInput& except)
-        {
-            cout << except.what() << endl;
-        }
-        catch (TaskNotFound& except)
-        {
-            cout << except.what() << endl;
-        }
-        catch (BadFileAccess& except)
-        {
-            cout << except.what() << endl;
-            exit = true;
-        }
-    }
-    csvHandler.writeFile(taskManager);
-
-    cout << " - - - END PROGRAM MAIN - - - " << endl;
-    
+    controller.routine();
+    // - - - END PROGRAM MAIN - - - 
     return 0;
 }

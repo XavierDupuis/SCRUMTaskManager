@@ -2,6 +2,7 @@
 #define TASKMANAGER_H
 
 #include <algorithm>
+#include <numeric>
 #include <vector>
 #include <memory>
 #include <iostream>
@@ -28,10 +29,10 @@ public:
 
 private:
     void sortTasks();
+    std::vector<std::unique_ptr<Task>> tasks_;
 
     unsigned iterationWeight_;
     unsigned iterationPeriod_;
-    std::vector<std::unique_ptr<Task>> tasks_;
 
     std::vector<const Task*> orderedTasksByRatio_;
     std::vector<const Task*> tasksTooHeavy_;

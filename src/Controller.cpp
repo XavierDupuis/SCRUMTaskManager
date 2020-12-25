@@ -5,6 +5,47 @@ Controller::Controller(TaskManager& taskManager)
 {
 }
 
+void Controller::routine()
+{
+    CSVHandler csvHandler("data.csv");
+
+    try
+    {
+        csvHandler.readFile(taskManager_);
+    } 
+    catch (BadFileAccess& except)
+    {
+        std::cout << except.what() << std::endl;
+        std::cout << "'data.csv' will be created" << std::endl;
+        std::cout << "Close and restart program" << std::endl;
+        csvHandler.writeFile(taskManager_);
+        return;
+    }
+
+    bool exit = false;
+    while (!exit)
+    {
+        try 
+        {
+            exit = menu();
+        } 
+        catch (InvalidInput& except)
+        {
+            std::cout << except.what() << std::endl;
+        }
+        catch (TaskNotFound& except)
+        {
+            std::cout << except.what() << std::endl;
+        }
+        catch (BadFileAccess& except)
+        {
+            std::cout << except.what() << std::endl;
+            exit = true;
+        }
+    }
+    csvHandler.writeFile(taskManager_);
+}
+
 bool Controller::menu()
 {
     std::cout << std::endl << std::endl << options_.second << std::endl;

@@ -69,6 +69,24 @@ std::ostream& operator<<(std::ostream& out, const TaskManager& taskManager)
     {
         out << *it << std::endl;
     }
+
+    unsigned totalWeight = accumulate(taskManager.tasks_.begin(), taskManager.tasks_.end(), 0, 
+    [](unsigned total, const std::unique_ptr<Task>& task)
+    {
+        return task->weight_ + total ;
+    });
+
+    unsigned totalValue = accumulate(taskManager.tasks_.begin(), taskManager.tasks_.end(), 0, 
+    [](unsigned total, const std::unique_ptr<Task>& task)
+    {
+        return task->value_ + total ;
+    });
+
+    std::cout << std::endl 
+              << "Number of tasks : " << taskManager.tasks_.size() << std::endl
+              << "Total weight    : " << totalWeight << std::endl
+              << "Total value     : " << totalValue << std::endl;
+
     return out;
 }
 

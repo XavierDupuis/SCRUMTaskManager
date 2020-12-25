@@ -4,6 +4,7 @@
 #include <iostream>
 
 #include "TaskManager.h"
+#include "CSVHandler.h"
 #include "ExceptTaskNotFound.h"
 #include "ExceptInvalidInput.h"
 
@@ -12,12 +13,14 @@ class Controller
 public:
     Controller(TaskManager& taskManager);
 
+    void routine();
     bool menu();
 
     std::unique_ptr<Task> inputTask();
     bool editTask();
     bool removeTask();
     bool updateTask();
+
 
 private:
     template<typename T>
