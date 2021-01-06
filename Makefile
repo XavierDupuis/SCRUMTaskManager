@@ -23,6 +23,9 @@ EXEC=program.out
 SOURCES=$(sort $(shell find $(SRC_DIR) -name '*.cpp'))
 OBJECTS=$(SOURCES:$(SRC_DIR)/%.cpp=$(BIN_DIR)/%.o)
 
+TEST_SOURCES=$(sort $(shell find $(TEST_DIR)/$(SRC_DIR) -name '*.cpp'))
+TEST_OBJECTS=$(TEST_SOURCES:$(TEST_DIR)/$(SRC_DIR)/%.cpp=$(TEST_DIR)/$(BIN_DIR)/%.o)
+
 
 all: $(BUILD_DIR)/$(EXEC) $(SOURCES) 
 
@@ -30,22 +33,30 @@ $(BUILD_DIR)/$(EXEC): $(OBJECTS)
 	mkdir -p $(BUILD_DIR)
 	$(CC) -o $@ $^ $(LDFLAGS) $(CCFLAGS)
 
-$(BIN_DIR)/%.o: $(SRC_DIR)/%.cpp # $(SRC_DIR)/%.h
+$(BIN_DIR)/%.o: $(SRC_DIR)/%.cpp
 	mkdir -p $(BIN_DIR)
 	$(CC) -o $@ -c $< $(CFLAGS) $(CCFLAGS)
 
 run: all
 	./$(BUILD_DIR)/$(EXEC)
 
-test: all
-	$(CC) -o $(BIN_DIR)/test.main.o -c $(TEST_DIR)/main.cpp $(CFLAGS) $(CCFLAGS)
-	$(CC) -o $(BUILD_DIR)/test.$(EXEC) $(BIN_DIR)/test.main.o $(LDFLAGS) $(CCFLAGS)
-	./$(BUILD_DIR)/test.$(EXEC)
+test: $(TEST_DIR)/$(BUILD_DIR)/test.$(EXEC) $(TEST_SOURCES) $(filter-out bin/main.o,$(OBJECTS))
+	./$(TEST_DIR)/$(BUILD_DIR)/test.$(EXEC)
+
+$(TEST_DIR)/$(BUILD_DIR)/test.$(EXEC): $(TEST_OBJECTS) $(filter-out src/main.cpp,$(SOURCES))
+	mkdir -p $(TEST_DIR)/$(BUILD_DIR)
+	$(CC) -o $@ $^ $(LDFLAGS) $(CCFLAGS) -lcppunit
+
+$(TEST_DIR)/$(BIN_DIR)/%.o: $(TEST_DIR)/$(SRC_DIR)/%.cpp
+	mkdir -p $(TEST_DIR)/$(BIN_DIR)
+	$(CC) -o $@ -c $< $(CFLAGS) $(CCFLAGS)
 
 clean:
 	rm -rf $(BUILD_DIR)
 	rm -rf $(BIN_DIR)
-	
+	rm -rf $(TEST_DIR)/$(BIN_DIR)
+	rm -rf $(TEST_DIR)/$(BUILD_DIR)
+
 help:
 	@echo Usage : make [tag]
 	@echo "   "[no_tag]"  ": make all
@@ -57,12 +68,13 @@ help:
 	
 printvars:
 	@echo VARIABLES
-	@echo "   "CC" 	      ": $(CC)
-	@echo "   "CCFLAGS"   ": $(CCFLAGS)
-	@echo "   "CFLAGS"    ": $(CFLAGS)
-	@echo "   "LDFLAGS"   ": $(LDFLAGS)
-	@echo "   "SRC_DIR"   ": $(SRC_DIR)
-	@echo "   "BIN_DIR"   ": $(BIN_DIR)
-	@echo "   "BUILD_DIR" ": $(BUILD_DIR)
-	@echo "   "EXEC"      ": $(EXEC)
-	@echo "   "OBJECTS"   ": $(OBJECTS)
+	@echo "   "CC" 	           ": $(CC)
+	@echo "   "CCFLAGS"         ": $(CCFLAGS)
+	@echo "   "CFLAGS"          ": $(CFLAGS)
+	@echo "   "LDFLAGS"         ": $(LDFLAGS)
+	@echo "   "SRC_DIR"         ": $(SRC_DIR)
+	@echo "   "BIN_DIR"         ": $(BIN_DIR)
+	@echo "   "BUILD_DIR"       ": $(BUILD_DIR)
+	@echo "   "EXEC"            ": $(EXEC)
+	@echo "   "OBJECTS"         ": $(OBJECTS)
+	@echo "   "TEST_OBJECTS"    ": $(TEST_OBJECTS)

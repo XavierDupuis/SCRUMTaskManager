@@ -4,7 +4,7 @@
 int main( int argc, char **argv)
 {
     CppUnit::TextUi::TestRunner runner;
-    runner.addTest(RabaisTest::suite());
+    runner.addTest(TaskTest::suite());
     runner.run();
     return 0;
 }

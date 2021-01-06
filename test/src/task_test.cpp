@@ -1,34 +1,35 @@
 #include "task_test.h"
 #include <iostream>
-void testFunction()
-{
-	Task task = Task("test",123,567);
-	std::cout << task;
-}
-/*
+
 void TaskTest::setUp() {
-		this->objet_a_tester = new Task();
+		this->objet_a_tester = new Task("",0,0);
 }
 
 void TaskTest::tearDown() {
 		delete this->objet_a_tester;
 }
 
-void TaskTest::test_1_task() {
-	int id = 25001;
-	this->objet_a_tester->ajouterClient(new Client(id, "nom", "prenom", 60, "H1C", {0,0,0,0,0,0,0,0,0}));
-	Facture une_facture;
-	une_facture.ajouterItem(1000);
-	float rabais = this->objet_a_tester->getRabais(une_facture, id);
-	CPPUNIT_ASSERT_DOUBLES_EQUAL(0.15, rabais, FLT_EPSILON);
+void TaskTest::test_weightHigh() {
+	this->objet_a_tester->name_= "weightHigh";
+	Task* task = new Task("weightHigh", std::numeric_limits<unsigned int>::max(), 1);
+	double expected = 0;
+	double actual = task->ratioWV_;
+	delete task;
+	CPPUNIT_ASSERT_DOUBLES_EQUAL(expected, actual, FLT_EPSILON);
 }
 
-void TaskTest::test_2_task() {
-	int id = 25001;
-	this->objet_a_tester->ajouterClient(new Client(id, "nom", "prenom", 60, "H1C", {0,0,0,0,0,0,0,0,0}));
-	Facture une_facture;
-	une_facture.ajouterItem(1000);
-	float rabais = this->objet_a_tester->getRabais(une_facture, id);
-	CPPUNIT_ASSERT_DOUBLES_EQUAL(0.15, rabais, FLT_EPSILON);
+void TaskTest::test_weightZero() {
+	Task* task = new Task("weightZero", 0, 1);
+	double expected = std::numeric_limits<double>::max();
+	double actual = task->ratioWV_;
+	delete task;
+	CPPUNIT_ASSERT_DOUBLES_EQUAL(expected, actual, FLT_EPSILON);
 }
-*/
+
+void TaskTest::test_valueZero() {
+	Task* task = new Task("valueZero", 1, 0);
+	double expected = 0;
+	double actual = task->ratioWV_;
+	delete task;
+	CPPUNIT_ASSERT_DOUBLES_EQUAL(expected, actual, FLT_EPSILON);
+}
