@@ -1,11 +1,10 @@
 # SCRUMTaskManager
-
 SCRUM Task Manager with a Knapsack problem solution 
 
 ## WINDOWS
 Use the following command to compile and run on windows
 ```bash
-./Makefile.bat run
+make run
 ```
 Executes MAKE rule and run executable in console
     (Compile /src files and create executable)
